@@ -3,4 +3,8 @@ class Somme35:
     self.n = n
   
   def run(self):
-    raise NotImplementedError("methode run à implémenter")
+    somme = 0
+    for i in range(0,self.n+1):
+    	if (i%3 == 0) or (i%5 == 0):
+    		somme += i
+    return somme
