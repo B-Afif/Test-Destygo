@@ -1,5 +1,3 @@
-from datetime import datetime
-
 #Méthode run récursive
 #Pour les grands nombres cette méthodes déclenche une erreur de dépassement du nombre maximal de niveaux de récursivité
 #Pour n = 30, le temps d'exécution dépasse 1s. Cette méthode n'est pas performante. 
@@ -8,6 +6,8 @@ class Fibo1:
     self.n = n
   
   def run(self):
+    if (self.n == 0):
+      return 0
     if (self.n == 1) or (self.n == 2):
       return 1
     return Fibo1(self.n-1).run() + Fibo1(self.n-2).run()
@@ -19,9 +19,9 @@ class Fibo2:
     self.n = n
   
   def run(self):
-    a = 1
+    a = 0
     b = 1
-    for i in range(self.n-1):
+    for i in range(self.n):
       a,b = b, b+a
     return a
 
@@ -38,10 +38,14 @@ class Fibo3:
       while True:
         a,b = b, a+b
         yield a
-    
-    fib = GenFib(a,b)
-    for i in range(self.n - 1):
-      next(fib)
-    return next(fib)
+    if (self.n == 0):
+      return 0
+    else:
+      fib = GenFib(a,b)
+      for i in range(self.n - 1):
+        next(fib)
+      return next(fib)
 
 #D'après les résultats des benchmarks, la méthode itérative est la plus performante parmis les 3 méthodes
+
+print(Fibo3(10).run())
